@@ -69,3 +69,196 @@
   </body>
 </html>
 
+
+#########
+ a = int(input("enter number="))
+ if a % 2 == 0:
+     print(a, "a is a even")
+ else:
+     print(a, "a is a odd ")
+
+## palindrome
+ n = int(input("enter number="))
+ n1 = n
+ reverse = 0
+ while n > 0:
+     rem = n % 10
+     n = n // 10
+     reverse = rem + reverse * 10
+
+ if n1 == reverse:
+     print(f"{n1} is palindrome number")
+ else:
+     print(f"{n1} is not palindrome number")
+
+## fibboniccai series
+ n = int(input("enter range for fibbonaccai series="))
+ i = 1
+ a = 0
+ b = 1
+ print(a)
+ print(b)
+ while i <= n-2:
+     c = a+b
+     print(c)
+     a = b
+     b = c
+     i = i+1
+
+## vowel reverse with upper and lower 
+ def reverse_vowels_and_swap_case(s):
+
+     vowels = set("aeiouAEIOU")
+    
+     extracted_vowels = [char for char in s if char in vowels][::-1]
+    
+     result = []
+     vowel_index = 0
+    
+     for char in s:
+         if char in vowels:
+             result.append(extracted_vowels[vowel_index].swapcase())
+             vowel_index += 1
+         else:
+             result.append(char)
+    
+     return ''.join(result)
+
+ input_str = "Hello, World!"
+ output_str = reverse_vowels_and_swap_case(input_str)
+ print(output_str)
+
+
+##delection separation "abcdabc"
+
+ def separate_unique_and_repeating(s):
+     # Dictionary to count the occurrences of each character
+     char_count = {}
+     for char in s:
+         char_count[char] = char_count.get(char, 0) + 1
+    
+     # Lists to store unique and repeating characters
+     unique_chars = []
+     repeating_chars = []
+    
+     for char in s:
+         if char_count[char] == 1:
+             unique_chars.append(char)
+         else:
+             repeating_chars.append(char)
+    
+     # Convert lists to strings
+     unique_str = ''.join(unique_chars)
+     repeating_str = ''.join(repeating_chars)
+    
+     return unique_str, repeating_str
+
+ # Example usage:
+ input_str = "abcdabc"
+ unique_str, repeating_str = separate_unique_and_repeating(input_str)
+ print(f"Unique characters: {unique_str}")     # Output: "d"
+ print(f"Repeating characters: {repeating_str}")  # Output: "abcabc" 
+
+## mongodb fake client
+from pymongo import MongoClient
+from faker import Faker
+import random
+
+# Initialize the Faker library
+fake = Faker()
+
+# Connect to MongoDB
+client = MongoClient('mongodb://localhost:27017/')
+db = client['fake_database']
+collection = db['fake_collection']
+
+# Function to generate fake data
+def generate_fake_data(num_records):
+    fake_data = []
+    for _ in range(num_records):
+        record = {
+            'name': fake.name(),
+            'address': fake.address(),
+            'email': fake.email(),
+            'phone_number': fake.phone_number(),
+            'job': fake.job(),
+            'company': fake.company(),
+            'birthdate': fake.date_of_birth(minimum_age=18, maximum_age=90).isoformat(),
+            'created_at': fake.date_time_this_year().isoformat(),
+            'balance': round(random.uniform(1000, 5000), 2)
+        }
+        fake_data.append(record)
+    return fake_data
+
+# Number of fake records to generate
+num_records = 100
+
+# Generate and insert the fake data into MongoDB
+fake_data = generate_fake_data(num_records)
+collection.insert_many(fake_data)
+
+print(f"{num_records} fake records inserted into MongoDB.")
+
+
+##html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registration Form</title>
+</head>
+<body>
+    <h2>Registration Form</h2>
+    <form action="/submit" method="post">
+        <table border="1">
+            <tr>
+                <td>Student Name:</td>
+                <td><input type="text" name="student_name" required></td>
+            </tr>
+            <tr>
+                <td>Father's Name:</td>
+                <td><input type="text" name="father_name" required></td>
+            </tr>
+            <tr>
+                <td>Mother's Name:</td>
+                <td><input type="text" name="mother_name" required></td>
+            </tr>
+            <tr>
+                <td>Date of Birth:</td>
+                <td><input type="date" name="dob" required></td>
+            </tr>
+            <tr>
+                <td>Gender:</td>
+                <td>
+                    <input type="radio" name="gender" value="male" required> Male
+                    <input type="radio" name="gender" value="female" required> Female
+                </td>
+            </tr>
+            <tr>
+                <td>Email ID:</td>
+                <td><input type="email" name="email" required></td>
+            </tr>
+            <tr>
+                <td>Mobile No.:</td>
+                <td><input type="tel" name="mobile" required></td>
+            </tr>
+            <tr>
+                <td>Address:</td>
+                <td><textarea name="address" required></textarea></td>
+            </tr>
+            <tr>
+                <td>State:</td>
+                <td><input type="text" name="state" required></td>
+            </tr>
+            <tr>
+                <td>City:</td>
+                <td><input type="text" name="city" required></td>
+            </tr>
+            <tr>
+                <td colspan="2"><input type="submit" value="Submit"></td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
+
+
